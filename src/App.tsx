@@ -1,6 +1,7 @@
 import { useState } from "react";
 import reactLogo from "./assets/react.svg";
 import viteLogo from "/vite.svg";
+import { Button } from "./components/ui/button";
 // import './App.css'; // This import is no longer needed
 
 function App() {
@@ -49,13 +50,9 @@ function App() {
       {/* Added some responsive text size and margin */}
       {/* Styles from .card */}
       <div className="p-8">
-        <button
-          onClick={() => setCount((count) => count + 1)}
-          // Basic button styling for better appearance, can be customized further
-          className="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2 px-4 rounded-lg shadow-md hover:shadow-lg transition-all duration-150 ease-in-out mb-4"
-        >
+        <Button onClick={() => setCount((count) => count + 1)}>
           count is {count}
-        </button>
+        </Button>
         <p>
           Edit <code>src/App.tsx</code> and save to test HMR
         </p>
