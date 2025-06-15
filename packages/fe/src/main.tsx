@@ -5,6 +5,7 @@ import "./index.css";
 
 // Import the generated route tree
 import { routeTree } from "./routeTree.gen";
+import { ServiceProvider } from './context/service_context';
 
 // Create a new router instance
 const router = createRouter({ routeTree });
@@ -22,7 +23,9 @@ if (!rootElement.innerHTML) {
   const root = createRoot(rootElement);
   root.render(
     <StrictMode>
-      <RouterProvider router={router} />
+      <ServiceProvider>
+        <RouterProvider router={router} />
+      </ServiceProvider>
     </StrictMode>,
   );
 }

@@ -28,6 +28,7 @@ catalogs:
   state-management:
     'zustand': 5.0.5
   ui:
+    '@radix-ui/react-navigation-menu': 1.2.13
     '@radix-ui/react-slot': 1.2.3
     '@tailwindcss/vite': 4.1.10
     'class-variance-authority': 0.7.1

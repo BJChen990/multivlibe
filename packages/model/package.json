@@ -1,0 +1,25 @@
+{
+  "name": "multivlibe-model",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "typescript": "catalog:base",
+    "vite": "catalog:base"
+  },
+  "exports": {
+    "./*": {
+      "types": "./src/*.d.ts",
+      "import": "./src/*.js",
+      "require": "./src/*.cjs"
+    }
+  },
+  "dependencies": {
+    "zod": "^3.25.64"
+  }
+}
