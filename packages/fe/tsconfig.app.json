@@ -19,15 +19,14 @@
     "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "erasableSyntaxOnly": true,
     "noFallthroughCasesInSwitch": true,
     "noUncheckedSideEffectImports": true,
 
     /* Shadcn */
     "baseUrl": ".",
     "paths": {
-      "@/*": ["packages/fe/src/*"]
+      "@/*": ["./src/*"]
     }
   },
-  "include": ["packages/fe/src"]
+  "include": ["src"]
 }

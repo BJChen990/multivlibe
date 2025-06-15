@@ -1,6 +1,6 @@
-import { createContext, useContext, ReactNode, useMemo } from 'react';
+import { createContext, useContext, type ReactNode, useMemo } from 'react';
 import { Preconditions } from 'multivlibe-model/utils/preconditions';
-import { RepositoryService } from '../services/repository/repository_service';
+import type { RepositoryService } from '../services/repository/repository_service';
 import { MockRepositoryClient } from '../services/repository/mock_repository_client';
 
 // Define the services interface

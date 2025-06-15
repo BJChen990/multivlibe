@@ -13,3 +13,13 @@ List all the configured repositories in the project from the repository service,
 By clicking on the "Add Repository" button, user will be redirected to the "Add Repository" page, which should be added later in a
 separate PR.
 Clicking on any repository will redirect user to the "Repository Details" page, which should be added later in a separate PR.
+
+### Add repository page
+
+URL: `/repositories/add`
+
+Page for setting up the new repository, with the following fields:
+
+- Repository URL: URL of the repository to be added.
+- Repository Name: Optional name for the repository, otherwise the URL will be used as the name.
+- Credentials: Optional credentials for the repository, if required. This can be a username and password or a token, depending on the repository type.
