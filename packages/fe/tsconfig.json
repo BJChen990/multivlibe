@@ -4,7 +4,7 @@
     /* Shadcn */
     "baseUrl": ".",
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": ["packages/fe/src/*"]
     }
   },
   "references": [

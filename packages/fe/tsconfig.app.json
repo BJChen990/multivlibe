@@ -26,8 +26,8 @@
     /* Shadcn */
     "baseUrl": ".",
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": ["packages/fe/src/*"]
     }
   },
-  "include": ["src"]
+  "include": ["packages/fe/src"]
 }
