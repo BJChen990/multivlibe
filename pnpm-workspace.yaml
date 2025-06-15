@@ -6,6 +6,7 @@ catalogs:
     vite: 6.3.5
     typescript: 5.8.3
     '@types/node': 24.0.1
+    "tsx": 4.7.1
   react:
     react: 19.1.0
     react-dom: 19.1.0
