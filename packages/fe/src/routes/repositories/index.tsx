@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
-import type { Repository } from "multivlibe-model/repositories/list_repositories";
+import type { Repository } from "multivlibe-model/repositories/repository";
 import type { RequestStatus } from "multivlibe-model/utils/request_status";
 import { useRepositoryService } from '@/context/service_context';
 import { Button } from "@/components/ui/button";
@@ -18,6 +18,9 @@ function Index() {
       setStatus({ status: "loading" });
       try {
         const response = await repositoryService.listRepositories({});
+        if (response.code !== 'ok') {
+          throw new Error('Failed to load repositories');
+        }
         setStatus({ status: "success", data: response.repositories });
       } catch (error) {
         console.error('Failed to load repositories:', error);

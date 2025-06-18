@@ -70,7 +70,7 @@ function AddRepository() {
       if ((validToken && validUserPassword)) {
         throw new Error("Please provide either username/password or token, not both.");
       }
-      await repositoryService.addRepository({
+      const response = await repositoryService.addRepository({
         url: data.url,
         name: data.name,
         ...(validUserPassword
@@ -82,8 +82,11 @@ function AddRepository() {
           : validToken
             ? { credentialType: "token", token: Preconditions.notNull(data.token) }
             : { credentialType: "none" }),
-      })
-      // Navigate back to repositories list
+      });
+      
+      if (response.code !== 'ok') {
+        throw new Error('Failed to add repository');
+      }
       navigate({ to: "/repositories" });
     } catch (error) {
       console.error("Failed to create repository:", error);
