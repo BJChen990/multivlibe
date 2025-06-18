@@ -15,8 +15,8 @@
   "exports": {
     "./*": {
       "types": "./src/*.d.ts",
-      "import": "./src/*.js",
-      "require": "./src/*.cjs"
+      "import": "./src/*.ts",
+      "require": "./src/*.ts"
     }
   },
   "dependencies": {
