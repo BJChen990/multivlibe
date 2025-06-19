@@ -1,24 +1,24 @@
 {
-  "name": "multivlibe-be",
-  "type": "module",
-  "scripts": {
-    "dev": "tsx watch src/index.ts",
-    "build": "tsc",
-    "start": "node dist/index.js"
-  },
-  "dependencies": {
-    "@hono/node-server": "^1.14.4",
-    "@libsql/client": "^0.15.9",
-    "dotenv": "^16.5.0",
-    "drizzle-orm": "^0.44.2",
-    "hono": "^4.7.11",
-    "multivlibe-model": "workspace:*",
-    "tsconfig-paths": "^4.2.0"
-  },
-  "devDependencies": {
-    "@types/node": "catalog:base",
-    "drizzle-kit": "^0.31.1",
-    "tsx": "catalog:base",
-    "typescript": "catalog:base"
-  }
+	"name": "multivlibe-be",
+	"type": "module",
+	"scripts": {
+		"dev": "tsx --env-file=\".env\" src/index.ts",
+		"build": "tsc",
+		"start": "node dist/index.js"
+	},
+	"dependencies": {
+		"@hono/node-server": "^1.14.4",
+		"@libsql/client": "^0.15.9",
+		"dotenv": "^16.5.0",
+		"drizzle-orm": "^0.44.2",
+		"hono": "^4.7.11",
+		"multivlibe-model": "workspace:*",
+		"tsconfig-paths": "^4.2.0"
+	},
+	"devDependencies": {
+		"@types/node": "catalog:base",
+		"drizzle-kit": "^0.31.1",
+		"tsx": "catalog:base",
+		"typescript": "catalog:base"
+	}
 }
