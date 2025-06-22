@@ -46,3 +46,9 @@ export class MockServiceNameClient implements ServiceInterface {
   }
 }
 ```
+
+## Documentation Guidelines
+
+- Add a short JSDoc comment at the top of every service interface explaining its purpose.
+- Document each method with a JSDoc block that describes parameters and return values.
+- Document individual fields in request and response schemas so their meaning is clear.
