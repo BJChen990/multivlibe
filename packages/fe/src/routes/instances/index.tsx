@@ -80,11 +80,11 @@ function InstancesPage() {
 								{repoInstances.map((inst) => (
 									<li key={inst.id} className="border p-2 rounded-md">
 										<div className="text-sm">Location: {inst.location}</div>
-										{inst.occupiedBy && (
-											<div className="text-sm text-gray-600">
-												Occupied By: {inst.occupiedBy}
-											</div>
-										)}
+										<div className="text-sm text-gray-600">
+											{inst.occupiedBy
+												? `Occupied by task: ${inst.occupiedBy}`
+												: "Reserved for user"}
+										</div>
 									</li>
 								))}
 							</ul>

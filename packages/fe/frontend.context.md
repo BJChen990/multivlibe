@@ -31,4 +31,5 @@ Page for setting up the new repository, with the following fields:
 URL: `/instances`
 
 Displays all cloned instances grouped under their repository. Each group lists the repository name with its associated instances, or states that no instances exist for the repository.
+Each instance entry displays its location and whether it is reserved for the user or currently occupied by a task.
 

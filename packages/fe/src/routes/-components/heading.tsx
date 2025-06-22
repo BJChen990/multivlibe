@@ -8,7 +8,7 @@ import {
 
 export const Heading = () => {
 	return (
-		<NavigationMenu className="p-4 border-b-1">
+		<NavigationMenu className="w-full p-4 border-b">
 			<NavigationMenuList>
 				<NavigationMenuItem>
 					<NavigationMenuLink asChild>
