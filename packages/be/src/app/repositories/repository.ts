@@ -5,6 +5,12 @@ import {
 import type { db } from "@/model.js";
 import { repositoriesTable } from "./schema.js";
 
+type RepositoryDraft = { name?: string; url: string } & (
+	| { credentialType: "email_password"; email: string; password: string }
+	| { credentialType: "token"; token: string }
+	| { credentialType: "none" }
+);
+
 export class RepositoriesRepository {
 	constructor(private readonly database: typeof db) {}
 
@@ -12,80 +18,35 @@ export class RepositoriesRepository {
 		const results = await this.database.select().from(repositoriesTable).all();
 		return results.map((row) => {
 			const { name, id, url, created, updated, ...credentials } = row;
-			const sharedContent = { name, id, url, created, updated };
+			const params = { name, id, url, created, updated };
 			switch (row.credentialType) {
 				case "email_password":
 					return RepositorySchema.parse({
-						...sharedContent,
+						...params,
 						credentialType: "email_password",
 						email: credentials.email,
 						password: credentials.password,
 					});
 				case "token":
 					return RepositorySchema.parse({
-						...sharedContent,
+						...params,
 						credentialType: "token",
 						token: credentials.token,
 					});
 				case "none":
-					return RepositorySchema.parse({
-						...sharedContent,
-						credentialType: "none",
-					});
+					return RepositorySchema.parse({ ...params, credentialType: "none" });
 				default:
 					throw new Error(`Unknown credential type: ${row.credentialType}`);
 			}
 		});
 	}
 
-	async addRepository(
-		repository: { name?: string; url: string } & (
-			| { credentialType: "email_password"; email: string; password: string }
-			| { credentialType: "token"; token: string }
-			| { credentialType: "none" }
-		),
-	): Promise<Repository> {
+	async addRepository(repository: RepositoryDraft): Promise<Repository> {
 		const now = Date.now();
-		const sharedContent = {
-			name: repository.name,
-			url: repository.url,
-			created: now,
-			updated: now,
-		};
-		switch (repository.credentialType) {
-			case "email_password":
-				return RepositorySchema.parse(
-					await this.database
-						.insert(repositoriesTable)
-						.values({
-							...sharedContent,
-							credentialType: "email_password",
-							email: repository.email,
-							password: repository.password,
-						})
-						.returning(),
-				);
-			case "token":
-				return RepositorySchema.parse(
-					await this.database
-						.insert(repositoriesTable)
-						.values({
-							...sharedContent,
-							credentialType: "token",
-							token: repository.token,
-						})
-						.returning(),
-				);
-			case "none":
-				return RepositorySchema.parse(
-					await this.database
-						.insert(repositoriesTable)
-						.values({
-							...sharedContent,
-							credentialType: "none",
-						})
-						.returning(),
-				);
-		}
+		const [record] = await this.database
+			.insert(repositoriesTable)
+			.values({ ...repository, created: now, updated: now })
+			.returning();
+		return RepositorySchema.parse(record);
 	}
 }

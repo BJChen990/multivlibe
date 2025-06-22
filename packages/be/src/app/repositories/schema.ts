@@ -14,6 +14,6 @@ export const repositoriesTable = sqliteTable("repositories", {
 	token: text(),
 
 	// Book keeping fields
-	created: int(),
-	updated: int(),
+	created: int().notNull(),
+	updated: int().notNull(),
 });
