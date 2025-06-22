@@ -1,30 +1,30 @@
+import { Link } from "@tanstack/react-router";
 import {
 	NavigationMenu,
 	NavigationMenuItem,
 	NavigationMenuLink,
 	NavigationMenuList,
-} from "@radix-ui/react-navigation-menu";
-import { Link } from "@tanstack/react-router";
+} from "@/components/ui/navigation-menu";
 
 export const Heading = () => {
 	return (
-        <NavigationMenu className="p-4 border-b-1">
-            <NavigationMenuList>
-                <NavigationMenuItem>
-                    <NavigationMenuLink asChild>
-                        <Link to="/repositories" className="[&.active]:font-bold">
-                            Repositories
-                        </Link>
-                    </NavigationMenuLink>
-                </NavigationMenuItem>
-                <NavigationMenuItem>
-                    <NavigationMenuLink asChild>
-                        <Link to="/instances" className="[&.active]:font-bold">
-                            Instances
-                        </Link>
-                    </NavigationMenuLink>
-                </NavigationMenuItem>
-            </NavigationMenuList>
-        </NavigationMenu>
+		<NavigationMenu className="p-4 border-b-1">
+			<NavigationMenuList>
+				<NavigationMenuItem>
+					<NavigationMenuLink asChild>
+						<Link to="/repositories" className="[&.active]:font-bold">
+							Repositories
+						</Link>
+					</NavigationMenuLink>
+				</NavigationMenuItem>
+				<NavigationMenuItem>
+					<NavigationMenuLink asChild>
+						<Link to="/instances" className="[&.active]:font-bold">
+							Instances
+						</Link>
+					</NavigationMenuLink>
+				</NavigationMenuItem>
+			</NavigationMenuList>
+		</NavigationMenu>
 	);
 };
