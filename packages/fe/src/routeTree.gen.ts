@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as RepositoriesIndexRouteImport } from './routes/repositories/index'
 import { Route as RepositoriesAddIndexRouteImport } from './routes/repositories/add/index'
+import { Route as InstancesIndexRouteImport } from './routes/instances/index'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -28,35 +29,44 @@ const RepositoriesAddIndexRoute = RepositoriesAddIndexRouteImport.update({
   path: '/repositories/add/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const InstancesIndexRoute = InstancesIndexRouteImport.update({
+  id: '/instances/',
+  path: '/instances/',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/repositories': typeof RepositoriesIndexRoute
   '/repositories/add': typeof RepositoriesAddIndexRoute
+  '/instances': typeof InstancesIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/repositories': typeof RepositoriesIndexRoute
   '/repositories/add': typeof RepositoriesAddIndexRoute
+  '/instances': typeof InstancesIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/repositories/': typeof RepositoriesIndexRoute
   '/repositories/add/': typeof RepositoriesAddIndexRoute
+  '/instances/': typeof InstancesIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/repositories' | '/repositories/add'
+  fullPaths: '/' | '/repositories' | '/repositories/add' | '/instances'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/repositories' | '/repositories/add'
-  id: '__root__' | '/' | '/repositories/' | '/repositories/add/'
+  to: '/' | '/repositories' | '/repositories/add' | '/instances'
+  id: '__root__' | '/' | '/repositories/' | '/repositories/add/' | '/instances/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   RepositoriesIndexRoute: typeof RepositoriesIndexRoute
   RepositoriesAddIndexRoute: typeof RepositoriesAddIndexRoute
+  InstancesIndexRoute: typeof InstancesIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -82,6 +92,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof RepositoriesAddIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/instances/': {
+      id: '/instances/'
+      path: '/instances'
+      fullPath: '/instances'
+      preLoaderRoute: typeof InstancesIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -89,6 +106,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   RepositoriesIndexRoute: RepositoriesIndexRoute,
   RepositoriesAddIndexRoute: RepositoriesAddIndexRoute,
+  InstancesIndexRoute: InstancesIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
