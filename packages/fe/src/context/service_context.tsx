@@ -1,16 +1,16 @@
 import { Preconditions } from "multivlibe-model/utils/preconditions";
 import { createContext, type ReactNode, useContext, useMemo } from "react";
+import { HttpInstanceClient } from "../services/instance/http_instance_client";
+import type { InstanceService } from "../services/instance/instance_service";
+import { MockInstanceClient } from "../services/instance/mock_instance_client";
 import { HttpRepositoryClient } from "../services/repository/http_repository_client";
 import { MockRepositoryClient } from "../services/repository/mock_repository_client";
 import type { RepositoryService } from "../services/repository/repository_service";
-import { HttpInstanceClient } from "../services/instance/http_instance_client";
-import { MockInstanceClient } from "../services/instance/mock_instance_client";
-import type { InstanceService } from "../services/instance/instance_service";
 
 // Define the services interface
 export interface Services {
-       repositories: RepositoryService;
-       instances: InstanceService;
+	repositories: RepositoryService;
+	instances: InstanceService;
 }
 
 // Create the context
@@ -22,17 +22,17 @@ export interface ServiceProviderProps {
 }
 
 export const ServiceProvider = ({ children }: ServiceProviderProps) => {
-       const services = useMemo(() => {
-               return import.meta.env.VITE_API_MODE === "mock"
-                       ? {
-                                repositories: new MockRepositoryClient(),
-                                instances: new MockInstanceClient(),
-                        }
-                       : {
-                                repositories: new HttpRepositoryClient(),
-                                instances: new HttpInstanceClient(),
-                        };
-       }, []);
+	const services = useMemo(() => {
+		return import.meta.env.VITE_API_MODE === "mock"
+			? {
+					repositories: new MockRepositoryClient(),
+					instances: new MockInstanceClient(),
+				}
+			: {
+					repositories: new HttpRepositoryClient(),
+					instances: new HttpInstanceClient(),
+				};
+	}, []);
 
 	return (
 		<ServiceContext.Provider value={services}>
@@ -48,11 +48,11 @@ export const useServices = (): Services => {
 
 // Individual service hooks for convenience
 export const useRepositoryService = (): RepositoryService => {
-       const { repositories } = useServices();
-       return repositories;
+	const { repositories } = useServices();
+	return repositories;
 };
 
 export const useInstanceService = (): InstanceService => {
-       const { instances } = useServices();
-       return instances;
+	const { instances } = useServices();
+	return instances;
 };

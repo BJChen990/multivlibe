@@ -14,6 +14,7 @@
 		"@radix-ui/react-label": "^2.1.7",
 		"@radix-ui/react-navigation-menu": "catalog:ui",
 		"@radix-ui/react-slot": "catalog:ui",
+		"@radix-ui/react-tabs": "^1.1.12",
 		"@tailwindcss/vite": "catalog:ui",
 		"@tanstack/react-router": "catalog:router",
 		"@tanstack/react-router-devtools": "catalog:router",

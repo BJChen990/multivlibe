@@ -1,28 +1,14 @@
 import { z } from "zod/v4";
-import { RepositorySchema } from "./repository";
+import {
+	RepositoryCredentialSchema,
+	RepositorySchema,
+	RepositorySourceSchema,
+} from "./repository";
 
-// Request
 export const AddRepositoryReqSchema = z
-	.object({
-		url: z.string(),
-		name: z.string().optional(),
-	})
-	.and(
-		z.discriminatedUnion("credentialType", [
-			z.object({
-				credentialType: z.literal("email_password"),
-				email: z.string(),
-				password: z.string(),
-			}),
-			z.object({
-				credentialType: z.literal("token"),
-				token: z.string(),
-			}),
-			z.object({
-				credentialType: z.literal("none"),
-			}),
-		]),
-	);
+	.object({ name: z.string().optional() })
+	.and(RepositoryCredentialSchema)
+	.and(RepositorySourceSchema);
 
 export type AddRepositoryReq = z.infer<typeof AddRepositoryReqSchema>;
 

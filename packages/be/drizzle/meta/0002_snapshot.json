@@ -1,8 +1,8 @@
 {
 	"version": "6",
 	"dialect": "sqlite",
-	"id": "79e0a735-86d1-44ae-bad9-7711a7acf7b3",
-	"prevId": "68771121-b4b3-4aa9-bfe7-e5f679fcbb8d",
+	"id": "0e34cef1-3b91-4876-9eb5-afa296cc9ada",
+	"prevId": "79e0a735-86d1-44ae-bad9-7711a7acf7b3",
 	"tables": {
 		"repositories": {
 			"name": "repositories",
@@ -21,11 +21,26 @@
 					"notNull": false,
 					"autoincrement": false
 				},
+				"type": {
+					"name": "type",
+					"type": "text",
+					"primaryKey": false,
+					"notNull": true,
+					"autoincrement": false,
+					"default": "'url'"
+				},
 				"url": {
 					"name": "url",
 					"type": "text",
 					"primaryKey": false,
-					"notNull": true,
+					"notNull": false,
+					"autoincrement": false
+				},
+				"path": {
+					"name": "path",
+					"type": "text",
+					"primaryKey": false,
+					"notNull": false,
 					"autoincrement": false
 				},
 				"credentialType": {
@@ -71,13 +86,7 @@
 					"autoincrement": false
 				}
 			},
-			"indexes": {
-				"repositories_url_unique": {
-					"name": "repositories_url_unique",
-					"columns": ["url"],
-					"isUnique": true
-				}
-			},
+			"indexes": {},
 			"foreignKeys": {},
 			"compositePrimaryKeys": {},
 			"uniqueConstraints": {},
