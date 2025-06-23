@@ -1,5 +1,6 @@
-export const Preconditions = {
-	notNull<T>(
+// biome-ignore lint/complexity/noStaticOnlyClass: Use static to work with assertion
+export class Preconditions {
+	static notNull<T>(
 		value: T | null | undefined,
 		message: string = "Required value not provided",
 	): T {
@@ -7,14 +8,14 @@ export const Preconditions = {
 			throw new Error(message);
 		}
 		return value;
-	},
+	}
 
-	assertState(
+	static assertState(
 		condition: boolean,
 		message: string = "Assertion failed",
 	): asserts condition {
 		if (!condition) {
 			throw new Error(message);
 		}
-	},
-};
+	}
+}

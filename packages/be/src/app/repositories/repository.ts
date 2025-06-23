@@ -1,40 +1,63 @@
+import type { InferSelectModel } from "drizzle-orm";
 import {
 	type Repository,
 	RepositorySchema,
 } from "multivlibe-model/repositories/repository";
+import { Preconditions } from "multivlibe-model/utils/preconditions";
 import type { db } from "@/model.js";
 import { repositoriesTable } from "./schema.js";
 
-type RepositoryDraft = { name?: string; url: string } & (
-	| { credentialType: "email_password"; email: string; password: string }
-	| { credentialType: "token"; token: string }
-	| { credentialType: "none" }
-);
+type RepositoryDraft = { name?: string } & (
+	| { type: "url"; url: string }
+	| { type: "local"; path: string }
+) &
+	(
+		| { credentialType: "email_password"; email: string; password: string }
+		| { credentialType: "token"; token: string }
+		| { credentialType: "none" }
+	);
 
 export class RepositoriesRepository {
 	constructor(private readonly database: typeof db) {}
 
+	private getRepoSource(row: InferSelectModel<typeof repositoriesTable>) {
+		if (row.type === "url") {
+			return { type: "url" as const, url: Preconditions.notNull(row.url) };
+		} else if (row.type === "local") {
+			return { type: "local" as const, path: Preconditions.notNull(row.path) };
+		}
+		throw new Error(`Unknown repository type: ${row.type}`);
+	}
+
 	async getAllRepositories(): Promise<Repository[]> {
 		const results = await this.database.select().from(repositoriesTable).all();
 		return results.map((row) => {
-			const { name, id, url, created, updated, ...credentials } = row;
-			const params = { name, id, url, created, updated };
+			const { name, id, created, updated, ...credentials } = row;
+			const commonParams = { name, id, created, updated };
+			const repoSource = this.getRepoSource(row);
+
 			switch (row.credentialType) {
 				case "email_password":
 					return RepositorySchema.parse({
-						...params,
+						...repoSource,
+						...commonParams,
 						credentialType: "email_password",
 						email: credentials.email,
 						password: credentials.password,
 					});
 				case "token":
 					return RepositorySchema.parse({
-						...params,
+						...repoSource,
+						...commonParams,
 						credentialType: "token",
 						token: credentials.token,
 					});
 				case "none":
-					return RepositorySchema.parse({ ...params, credentialType: "none" });
+					return RepositorySchema.parse({
+						...repoSource,
+						...commonParams,
+						credentialType: "none",
+					});
 				default:
 					throw new Error(`Unknown credential type: ${row.credentialType}`);
 			}

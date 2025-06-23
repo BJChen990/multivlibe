@@ -11,8 +11,8 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as RepositoriesIndexRouteImport } from './routes/repositories/index'
-import { Route as RepositoriesAddIndexRouteImport } from './routes/repositories/add/index'
 import { Route as InstancesIndexRouteImport } from './routes/instances/index'
+import { Route as RepositoriesAddIndexRouteImport } from './routes/repositories/add/index'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -24,49 +24,49 @@ const RepositoriesIndexRoute = RepositoriesIndexRouteImport.update({
   path: '/repositories/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const RepositoriesAddIndexRoute = RepositoriesAddIndexRouteImport.update({
-  id: '/repositories/add/',
-  path: '/repositories/add/',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const InstancesIndexRoute = InstancesIndexRouteImport.update({
   id: '/instances/',
   path: '/instances/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const RepositoriesAddIndexRoute = RepositoriesAddIndexRouteImport.update({
+  id: '/repositories/add/',
+  path: '/repositories/add/',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/instances': typeof InstancesIndexRoute
   '/repositories': typeof RepositoriesIndexRoute
   '/repositories/add': typeof RepositoriesAddIndexRoute
-  '/instances': typeof InstancesIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/instances': typeof InstancesIndexRoute
   '/repositories': typeof RepositoriesIndexRoute
   '/repositories/add': typeof RepositoriesAddIndexRoute
-  '/instances': typeof InstancesIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/instances/': typeof InstancesIndexRoute
   '/repositories/': typeof RepositoriesIndexRoute
   '/repositories/add/': typeof RepositoriesAddIndexRoute
-  '/instances/': typeof InstancesIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/repositories' | '/repositories/add' | '/instances'
+  fullPaths: '/' | '/instances' | '/repositories' | '/repositories/add'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/repositories' | '/repositories/add' | '/instances'
-  id: '__root__' | '/' | '/repositories/' | '/repositories/add/' | '/instances/'
+  to: '/' | '/instances' | '/repositories' | '/repositories/add'
+  id: '__root__' | '/' | '/instances/' | '/repositories/' | '/repositories/add/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  InstancesIndexRoute: typeof InstancesIndexRoute
   RepositoriesIndexRoute: typeof RepositoriesIndexRoute
   RepositoriesAddIndexRoute: typeof RepositoriesAddIndexRoute
-  InstancesIndexRoute: typeof InstancesIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -85,13 +85,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof RepositoriesIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/repositories/add/': {
-      id: '/repositories/add/'
-      path: '/repositories/add'
-      fullPath: '/repositories/add'
-      preLoaderRoute: typeof RepositoriesAddIndexRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/instances/': {
       id: '/instances/'
       path: '/instances'
@@ -99,14 +92,21 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof InstancesIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/repositories/add/': {
+      id: '/repositories/add/'
+      path: '/repositories/add'
+      fullPath: '/repositories/add'
+      preLoaderRoute: typeof RepositoriesAddIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  InstancesIndexRoute: InstancesIndexRoute,
   RepositoriesIndexRoute: RepositoriesIndexRoute,
   RepositoriesAddIndexRoute: RepositoriesAddIndexRoute,
-  InstancesIndexRoute: InstancesIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
