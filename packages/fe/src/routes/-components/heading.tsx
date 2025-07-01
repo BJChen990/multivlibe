@@ -8,23 +8,25 @@ import {
 
 export const Heading = () => {
 	return (
-		<NavigationMenu className="w-full p-4 border-b">
-			<NavigationMenuList>
-				<NavigationMenuItem>
-					<NavigationMenuLink asChild>
-						<Link to="/repositories" className="[&.active]:font-bold">
-							Repositories
-						</Link>
-					</NavigationMenuLink>
-				</NavigationMenuItem>
-				<NavigationMenuItem>
-					<NavigationMenuLink asChild>
-						<Link to="/instances" className="[&.active]:font-bold">
-							Instances
-						</Link>
-					</NavigationMenuLink>
-				</NavigationMenuItem>
-			</NavigationMenuList>
-		</NavigationMenu>
+		<div className="w-full border-b">
+			<NavigationMenu className="w-full p-4">
+				<NavigationMenuList>
+					<NavigationMenuItem>
+						<NavigationMenuLink asChild>
+							<Link to="/repositories" className="[&.active]:font-bold">
+								Repositories
+							</Link>
+						</NavigationMenuLink>
+					</NavigationMenuItem>
+					<NavigationMenuItem>
+						<NavigationMenuLink asChild>
+							<Link to="/instances" className="[&.active]:font-bold">
+								Instances
+							</Link>
+						</NavigationMenuLink>
+					</NavigationMenuItem>
+				</NavigationMenuList>
+			</NavigationMenu>
+		</div>
 	);
 };

@@ -24,6 +24,17 @@ export const createRepositoriesEndpoints = (
 		}
 	});
 
+	app.get("/repositories/:id", async (c) => {
+		try {
+			const id = parseInt(c.req.param("id"));
+			const repository = await repo.getRepositoryDetail(id);
+			return c.json({ code: "ok", repository });
+		} catch (error) {
+			console.error(error);
+			return c.json({ code: "unknown_error" }, 500);
+		}
+	});
+
 	app.post("/repositories", async (c) => {
 		try {
 			const req = AddRepositoryReqSchema.parse(await c.req.json());

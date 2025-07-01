@@ -3,6 +3,10 @@ import type {
 	AddRepositoryRes,
 } from "multivlibe-model/repositories/add_repository";
 import type {
+	GetRepositoryDetailReq,
+	GetRepositoryDetailRes,
+} from "multivlibe-model/repositories/get_repository_detail";
+import type {
 	ListRepositoriesReq,
 	ListRepositoriesRes,
 } from "multivlibe-model/repositories/list_repositories";
@@ -82,5 +86,13 @@ export class MockRepositoryClient implements RepositoryService {
 
 		this.repositories.push(repository);
 		return { code: "ok", repository };
+	}
+
+	async getRepositoryDetail(
+		req: GetRepositoryDetailReq,
+	): Promise<GetRepositoryDetailRes> {
+		await delay(this.timeout);
+		const repository = this.repositories.find((r) => r.id === req.id);
+		return repository ? { code: "ok", repository } : { code: "unknown_error" };
 	}
 }

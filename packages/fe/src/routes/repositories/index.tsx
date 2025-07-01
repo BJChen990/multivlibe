@@ -60,13 +60,20 @@ function Index() {
 					<ul className="space-y-2">
 						{status.status === "success" &&
 							status.data.map((repo) => (
-								<li
+								<Link
+									to="/repositories/$id"
+									params={{ id: String(repo.id) }}
 									key={repo.id}
-									className="border p-3 rounded-lg hover:shadow-md transition-shadow cursor-pointer"
+									className="block"
+									preload={false}
 								>
-									<strong className="text-lg">{repo.name}</strong>
-									<p className="text-sm text-gray-600">ID: {repo.id}</p>
-								</li>
+									<li
+										className="border p-3 rounded-lg hover:shadow-md transition-shadow cursor-pointer"
+									>
+										<strong className="text-lg">{repo.name}</strong>
+										<p className="text-sm text-gray-600">ID: {repo.id}</p>
+									</li>
+								</Link>
 							))}
 					</ul>
 				)}
