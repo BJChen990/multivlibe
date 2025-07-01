@@ -2,12 +2,14 @@ import { createRouter, RouterProvider } from "@tanstack/react-router";
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import "./index.css";
-import { ServiceProvider } from "./context/service_context";
-
+import { ServiceContext } from "./context/service_context";
 // Import the generated route tree
 import { routeTree } from "./routeTree.gen";
+import { createServices } from "./services";
 
-const router = createRouter({ routeTree });
+const services = createServices();
+
+const router = createRouter({ routeTree, context: { services } });
 
 // Register the router instance for type safety
 declare module "@tanstack/react-router" {
@@ -22,9 +24,9 @@ if (rootElement && !rootElement.innerHTML) {
 	const root = createRoot(rootElement);
 	root.render(
 		<StrictMode>
-			<ServiceProvider>
+			<ServiceContext.Provider value={services}>
 				<RouterProvider router={router} />
-			</ServiceProvider>
+			</ServiceContext.Provider>
 		</StrictMode>,
 	);
 }

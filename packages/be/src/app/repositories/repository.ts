@@ -1,4 +1,4 @@
-import type { InferSelectModel } from "drizzle-orm";
+import { eq, type InferSelectModel } from "drizzle-orm";
 import {
 	type Repository,
 	RepositorySchema,
@@ -62,6 +62,16 @@ export class RepositoriesRepository {
 					throw new Error(`Unknown credential type: ${row.credentialType}`);
 			}
 		});
+	}
+
+	async getRepositoryDetail(id: number): Promise<Repository> {
+		return RepositorySchema.parse(
+			await this.database
+				.select()
+				.from(repositoriesTable)
+				.where(eq(repositoriesTable.id, id))
+				.get(),
+		);
 	}
 
 	async addRepository(repository: RepositoryDraft): Promise<Repository> {
