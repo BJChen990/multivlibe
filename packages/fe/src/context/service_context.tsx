@@ -5,8 +5,8 @@ import type { RepositoryService } from "../services/repository/repository_servic
 
 // Define the services interface
 export interface Services {
-	repositories: RepositoryService;
-	instances: InstanceService;
+  repositories: RepositoryService;
+  instances: InstanceService;
 }
 
 // Create the context
@@ -14,21 +14,21 @@ export const ServiceContext = createContext<Services | undefined>(undefined);
 
 // Service provider component
 export interface ServiceProviderProps {
-	children: ReactNode;
+  children: ReactNode;
 }
 
 // Hook to use services
 export const useServices = (): Services => {
-	return Preconditions.notNull(useContext(ServiceContext));
+  return Preconditions.notNull(useContext(ServiceContext));
 };
 
 // Individual service hooks for convenience
 export const useRepositoryService = (): RepositoryService => {
-	const { repositories } = useServices();
-	return repositories;
+  const { repositories } = useServices();
+  return repositories;
 };
 
 export const useInstanceService = (): InstanceService => {
-	const { instances } = useServices();
-	return instances;
+  const { instances } = useServices();
+  return instances;
 };

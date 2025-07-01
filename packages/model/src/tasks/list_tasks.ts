@@ -3,24 +3,24 @@ import { TaskSchema } from "./task";
 
 /** Request for listing tasks */
 export const ListTasksReqSchema = z.object({
-        /** Optional list of instance IDs to filter tasks */
-        instanceIds: z.array(z.number()).optional(),
+  /** Optional list of instance IDs to filter tasks */
+  instanceIds: z.array(z.number()).optional(),
 });
 export type ListTasksReq = z.infer<typeof ListTasksReqSchema>;
 
 /** Successful response including all tasks */
 export const ListTasksSuccessResSchema = z.object({
-        code: z.literal("ok"),
-        tasks: z.array(TaskSchema),
+  code: z.literal("ok"),
+  tasks: z.array(TaskSchema),
 });
 /** Generic failure response */
 export const ListTasksFailureResSchema = z.object({
-        code: z.literal("unknown_error"),
+  code: z.literal("unknown_error"),
 });
 /** Union type of possible list tasks responses */
 export const ListTasksResSchema = z.union([
-        ListTasksSuccessResSchema,
-        ListTasksFailureResSchema,
+  ListTasksSuccessResSchema,
+  ListTasksFailureResSchema,
 ]);
 
 export type ListTasksSuccessRes = z.infer<typeof ListTasksSuccessResSchema>;

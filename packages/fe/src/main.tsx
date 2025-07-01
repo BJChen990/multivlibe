@@ -13,20 +13,20 @@ const router = createRouter({ routeTree, context: { services } });
 
 // Register the router instance for type safety
 declare module "@tanstack/react-router" {
-	interface Register {
-		router: typeof router;
-	}
+  interface Register {
+    router: typeof router;
+  }
 }
 
 // Render the app
 const rootElement = document.getElementById("root");
 if (rootElement && !rootElement.innerHTML) {
-	const root = createRoot(rootElement);
-	root.render(
-		<StrictMode>
-			<ServiceContext.Provider value={services}>
-				<RouterProvider router={router} />
-			</ServiceContext.Provider>
-		</StrictMode>,
-	);
+  const root = createRoot(rootElement);
+  root.render(
+    <StrictMode>
+      <ServiceContext.Provider value={services}>
+        <RouterProvider router={router} />
+      </ServiceContext.Provider>
+    </StrictMode>,
+  );
 }

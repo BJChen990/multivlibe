@@ -7,21 +7,21 @@ export type ListRepositoriesReq = z.infer<typeof ListRepositoriesReqSchema>;
 
 // Response
 export const ListRepositoriesSuccessResSchema = z.object({
-	code: z.literal("ok"),
-	repositories: z.array(RepositorySchema),
+  code: z.literal("ok"),
+  repositories: z.array(RepositorySchema),
 });
 export const ListRepositoriesFailureResSchema = z.object({
-	code: z.literal("unknown_error"),
+  code: z.literal("unknown_error"),
 });
 export const ListRepositoriesResSchema = z.union([
-	ListRepositoriesSuccessResSchema,
-	ListRepositoriesFailureResSchema,
+  ListRepositoriesSuccessResSchema,
+  ListRepositoriesFailureResSchema,
 ]);
 
 export type ListRepositoriesSuccessRes = z.infer<
-	typeof ListRepositoriesSuccessResSchema
+  typeof ListRepositoriesSuccessResSchema
 >;
 export type ListRepositoriesFailureRes = z.infer<
-	typeof ListRepositoriesFailureResSchema
+  typeof ListRepositoriesFailureResSchema
 >;
 export type ListRepositoriesRes = z.infer<typeof ListRepositoriesResSchema>;

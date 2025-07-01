@@ -6,18 +6,18 @@ import { MockRepositoryClient } from "./repository/mock_repository_client";
 import type { RepositoryService } from "./repository/repository_service";
 
 export type Services = {
-	repositories: RepositoryService;
-	instances: InstanceService;
+  repositories: RepositoryService;
+  instances: InstanceService;
 };
 
 export const createServices = () => {
-	return import.meta.env.VITE_API_MODE === "mock"
-		? {
-				repositories: new MockRepositoryClient(),
-				instances: new MockInstanceClient(),
-			}
-		: {
-				repositories: new HttpRepositoryClient(),
-				instances: new HttpInstanceClient(),
-			};
+  return import.meta.env.VITE_API_MODE === "mock"
+    ? {
+        repositories: new MockRepositoryClient(),
+        instances: new MockInstanceClient(),
+      }
+    : {
+        repositories: new HttpRepositoryClient(),
+        instances: new HttpInstanceClient(),
+      };
 };

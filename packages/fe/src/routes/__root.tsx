@@ -4,11 +4,11 @@ import type { Services } from "@/services";
 import { Heading } from "./-components/heading";
 
 export const Route = createRootRouteWithContext<{ services: Services }>()({
-	component: () => (
-		<>
-			<Heading />
-			<Outlet />
-			<TanStackRouterDevtools />
-		</>
-	),
+  component: () => (
+    <>
+      <Heading />
+      <Outlet />
+      <TanStackRouterDevtools />
+    </>
+  ),
 });

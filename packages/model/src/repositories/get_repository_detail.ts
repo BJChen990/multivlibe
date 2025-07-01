@@ -5,7 +5,9 @@ import { RepositorySchema } from "./repository";
 export const GetRepositoryDetailReqSchema = z.object({
   id: z.number(),
 });
-export type GetRepositoryDetailReq = z.infer<typeof GetRepositoryDetailReqSchema>;
+export type GetRepositoryDetailReq = z.infer<
+  typeof GetRepositoryDetailReqSchema
+>;
 
 // Response
 export const GetRepositoryDetailSuccessResSchema = z.object({
@@ -26,4 +28,6 @@ export type GetRepositoryDetailSuccessRes = z.infer<
 export type GetRepositoryDetailFailureRes = z.infer<
   typeof GetRepositoryDetailFailureResSchema
 >;
-export type GetRepositoryDetailRes = z.infer<typeof GetRepositoryDetailResSchema>; 
+export type GetRepositoryDetailRes = z.infer<
+  typeof GetRepositoryDetailResSchema
+>;
