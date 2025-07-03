@@ -1,12 +1,14 @@
 import { Preconditions } from "multivlibe-model/utils/preconditions";
 import { createContext, type ReactNode, useContext } from "react";
-import type { InstanceService } from "../services/instance/instance_service";
-import type { RepositoryService } from "../services/repository/repository_service";
+import type { InstanceService } from "@/services/instance/instance_service";
+import type { RepositoryService } from "@/services/repository/repository_service";
+import type { TaskService } from "@/services/task/task_service";
 
 // Define the services interface
 export interface Services {
   repositories: RepositoryService;
   instances: InstanceService;
+  tasks: TaskService;
 }
 
 // Create the context
@@ -31,4 +33,9 @@ export const useRepositoryService = (): RepositoryService => {
 export const useInstanceService = (): InstanceService => {
   const { instances } = useServices();
   return instances;
+};
+
+export const useTaskService = (): TaskService => {
+  const { tasks } = useServices();
+  return tasks;
 };

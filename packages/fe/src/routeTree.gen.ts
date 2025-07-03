@@ -10,14 +10,21 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as TasksIndexRouteImport } from './routes/tasks/index'
 import { Route as RepositoriesIndexRouteImport } from './routes/repositories/index'
 import { Route as InstancesIndexRouteImport } from './routes/instances/index'
+import { Route as TasksAddRouteImport } from './routes/tasks/add'
 import { Route as RepositoriesIdRouteImport } from './routes/repositories/$id'
 import { Route as RepositoriesAddIndexRouteImport } from './routes/repositories/add/index'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TasksIndexRoute = TasksIndexRouteImport.update({
+  id: '/tasks/',
+  path: '/tasks/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const RepositoriesIndexRoute = RepositoriesIndexRouteImport.update({
@@ -28,6 +35,11 @@ const RepositoriesIndexRoute = RepositoriesIndexRouteImport.update({
 const InstancesIndexRoute = InstancesIndexRouteImport.update({
   id: '/instances/',
   path: '/instances/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TasksAddRoute = TasksAddRouteImport.update({
+  id: '/tasks/add',
+  path: '/tasks/add',
   getParentRoute: () => rootRouteImport,
 } as any)
 const RepositoriesIdRoute = RepositoriesIdRouteImport.update({
@@ -44,23 +56,29 @@ const RepositoriesAddIndexRoute = RepositoriesAddIndexRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/repositories/$id': typeof RepositoriesIdRoute
+  '/tasks/add': typeof TasksAddRoute
   '/instances': typeof InstancesIndexRoute
   '/repositories': typeof RepositoriesIndexRoute
+  '/tasks': typeof TasksIndexRoute
   '/repositories/add': typeof RepositoriesAddIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/repositories/$id': typeof RepositoriesIdRoute
+  '/tasks/add': typeof TasksAddRoute
   '/instances': typeof InstancesIndexRoute
   '/repositories': typeof RepositoriesIndexRoute
+  '/tasks': typeof TasksIndexRoute
   '/repositories/add': typeof RepositoriesAddIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/repositories/$id': typeof RepositoriesIdRoute
+  '/tasks/add': typeof TasksAddRoute
   '/instances/': typeof InstancesIndexRoute
   '/repositories/': typeof RepositoriesIndexRoute
+  '/tasks/': typeof TasksIndexRoute
   '/repositories/add/': typeof RepositoriesAddIndexRoute
 }
 export interface FileRouteTypes {
@@ -68,30 +86,38 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/repositories/$id'
+    | '/tasks/add'
     | '/instances'
     | '/repositories'
+    | '/tasks'
     | '/repositories/add'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/repositories/$id'
+    | '/tasks/add'
     | '/instances'
     | '/repositories'
+    | '/tasks'
     | '/repositories/add'
   id:
     | '__root__'
     | '/'
     | '/repositories/$id'
+    | '/tasks/add'
     | '/instances/'
     | '/repositories/'
+    | '/tasks/'
     | '/repositories/add/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   RepositoriesIdRoute: typeof RepositoriesIdRoute
+  TasksAddRoute: typeof TasksAddRoute
   InstancesIndexRoute: typeof InstancesIndexRoute
   RepositoriesIndexRoute: typeof RepositoriesIndexRoute
+  TasksIndexRoute: typeof TasksIndexRoute
   RepositoriesAddIndexRoute: typeof RepositoriesAddIndexRoute
 }
 
@@ -102,6 +128,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/tasks/': {
+      id: '/tasks/'
+      path: '/tasks'
+      fullPath: '/tasks'
+      preLoaderRoute: typeof TasksIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/repositories/': {
@@ -116,6 +149,13 @@ declare module '@tanstack/react-router' {
       path: '/instances'
       fullPath: '/instances'
       preLoaderRoute: typeof InstancesIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/tasks/add': {
+      id: '/tasks/add'
+      path: '/tasks/add'
+      fullPath: '/tasks/add'
+      preLoaderRoute: typeof TasksAddRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/repositories/$id': {
@@ -138,8 +178,10 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   RepositoriesIdRoute: RepositoriesIdRoute,
+  TasksAddRoute: TasksAddRoute,
   InstancesIndexRoute: InstancesIndexRoute,
   RepositoriesIndexRoute: RepositoriesIndexRoute,
+  TasksIndexRoute: TasksIndexRoute,
   RepositoriesAddIndexRoute: RepositoriesAddIndexRoute,
 }
 export const routeTree = rootRouteImport
