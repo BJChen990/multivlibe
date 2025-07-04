@@ -21,3 +21,16 @@ export const repositoriesTable = sqliteTable("repositories", {
   created: int().notNull(),
   updated: int().notNull(),
 });
+
+export const tasksTable = sqliteTable("tasks", {
+  id: int().primaryKey({ autoIncrement: true }),
+  // Instance this task is attached to
+  instanceId: int().notNull(),
+  // Runner implementation executing this task
+  runner: text().notNull().default("DryRun"),
+  // Title provided by the runner describing the task
+  title: text().notNull(),
+  // Book keeping fields
+  created: int().notNull(),
+  updated: int().notNull(),
+});
